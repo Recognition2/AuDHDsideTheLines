@@ -1,0 +1,201 @@
+/* =========================================================
+   Button top
+   ========================================================= */
+#myBtn {
+  bottom: 1rem;
+  right: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  position: fixed;
+  z-index: 999;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  background-color: var(--light-color-2);
+  color: var(--dark-color-1);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+/* =========================================================
+   Page (posts)
+   ========================================================= */
+p.publish-date {
+  color: var(--dark-color-2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+}
+
+.left {
+  width: 75%;
+  padding-right: 30px;
+}
+
+.right {
+  width: 25%;
+  padding-left: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .left, .right {
+    padding: 0;
+  }
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.content-gallery.about {
+  width: 100%;
+  display: flex;                /* gebruik flex om te centreren */
+  justify-content: center;      /* horizontaal centreren */
+  position: relative;
+  box-sizing: border-box;
+}
+
+.content-gallery.about img {
+  width: 70%;
+  display: block;               /* voorkomt witruimte onder de afbeelding */
+  position: relative;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    width: 100%;
+  }
+  .content-gallery.about img {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   Sidebar tags
+   ========================================================= */
+
+.column.right .tags li{
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 15px 10px;
+}
+
+.column.right .tags li a {
+    text-wrap: nowrap;
+    width: fit-content;
+    padding: 12px 15px !important;
+    border: 2px solid var(--dark-color-2);
+    /* background-color: var(--light-color-2); */
+    color: var(--dark-color-2);
+    border-radius: 50px;
+    font-weight: 400;
+}
+
+.column.right .tags li a:hover {
+    background-color: var(--light-color-2);
+    color: var(--dark-color-2);
+}
+
+.column.right .social-link {
+  display: flex;
+  align-items: center;   /* icoon en tekst mooi uitlijnen */
+  gap: 5px;              /* ruimte tussen icoon en tekst */
+  fill: var(--dark-color-1);
+  color: var(--dark-color-1);        
+}
+
+.social-link svg {
+  flex-shrink: 0;        /* icoon blijft altijd zichtbaar */
+  width: 32px;
+  height: 32px;
+}
+
+.column.right .social-link:hover {
+  fill: var(--dark-color-2);
+  color: var(--dark-color-2); 
+}
+
+
+
+/* =========================================================
+   Tag page
+   ========================================================= */
+
+.tag-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.tag-box {
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  height: 400px;
+  text-align: center;
+  background-color: var(--light-color-1);
+  padding: 10px;
+  /* border: 1px solid var(--dark-color-1); */
+  transition: transform 0.3s ease;
+}
+
+.tag-box:hover {
+  transform: scale(1.03);
+}
+
+.tag-box h2{
+  color: var(--dark-color-1);
+}
+
+.tag-box:hover h2{
+  color: var(--near-white);
+}
+
+
+
+/* =========================================================
+   Carousel posts
+   ========================================================= */
+
+.carousel .tag-container {
+  display: grid;
+  grid-auto-flow: column;           /* horizontaal scrollen */
+  grid-auto-columns: minmax(350px, 1fr); /* elk item minimaal 350px, maximaal gelijk verdeeld */
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;   /* wat ruimte zodat scrollbar niet tegen de content plakt */
+}
+
+.carousel .tag-container a {
+  scroll-snap-align: start;
+  display: block; /* belangrijk zodat het grid-item de volledige kolombreedte pakt */
+}
+
+.carousel .tag-box:hover {
+  transform: scale(1);
+}
+
+/* =========================================================
+   Homepage
+   ========================================================= */
+
+section.home-page {
+  padding: 2rem 0;
+}
+
+.home-page h1 {
+  text-align: center;
+}
+
+

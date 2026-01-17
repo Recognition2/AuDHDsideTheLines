@@ -1,0 +1,37 @@
+name: Deploy repo to GitHub Pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Push-to-GitHub:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Yay this job has been started!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - run: echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
+      - name: Commit and push changes
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd "${{ gitea.workspace }}"
+          rm .git -rf
+          git config --global user.name "actions-bot"
+          git config --global user.email "no-reply@example.com"
+          git config --global init.defaultBranch master
+          git init
+          git add .
+          git commit -m "update website $(date +'%Y-%m-%d')"
+          git remote add origin git@github.com:Recognition2/AuDHDsideTheLines.git
+          mkdir ~/.ssh -p
+          set +x
+          echo "${{ secrets.GH_DEPLOY_KEY }}" >> ~/.ssh/id_ed25519
+          chmod 0600 ~/.ssh/id_ed25519
+          set -x
+          git push origin master --force
+      - run: echo "Done! Job status is ${{ job.status }}."
+

@@ -1,0 +1,114 @@
+/* =========================================================
+   Huisstijl kenmerken
+   ========================================================= */
+:root {
+  --dark-color-1: #38382E;  /* black olive */
+  --light-color-1:#D1D1C7;  /* timberwolf */
+  --near-white:   #FFF6EF;  /* seashell */
+  --light-color-2:#FFD3AD;  /* light orange */
+  --dark-color-2: #E06900;  /* burnt orange */
+  --header-text:    'Montserrat'; 
+  --plain-text:     'Roboto';
+
+  /* --wave-1: "M0,10 Q180,30 360,10 T720,10 T1080,10 T1440,10 V100 H0 Z"; */
+  /* --wave-2: "M0,30 Q140,50 320,30 T680,30 T1040,30 T1400,30 T1760,30 V100 H0 Z"; */
+}
+
+/* =========================================================
+   Basisstijl indeling
+   ========================================================= */
+h1, h2, h3 {
+  font-family: var(--header-text), sans-serif;
+}
+
+p, h4 {
+  font-family: var(--plain-text), sans-serif;
+  font-size: clamp(16px, 2.2vw, 18px); 
+} 
+
+h1 {
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(20px, 3.2vw, 24px);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(18, 2.7vw, 20px);
+  font-weight: 400;
+}
+
+body {
+  color: var(--dark-color-1);
+  background-color: var(--near-white);
+  line-height: 1.5;
+  margin: 0;
+}
+
+main {
+  padding: 1rem 8rem;
+}
+@media screen and (max-width: 800px) {
+  main {
+    padding: 1rem;
+  }
+}
+
+a {
+  color: var(--dark-color-2);
+  text-decoration: none;
+}
+
+ul li {
+  font-family: var(--plain-text), sans-serif;
+  font-size: clamp(16px, 2.2vw, 18px); 
+}
+
+img {
+  max-width: 100%;
+}
+
+.content-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  gap: 1rem; /* ruimte tussen de foto's */
+}
+
+@media (max-width: 800px) {
+  .content-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+.content-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 25px;
+}
+
+/* =========================================================
+   Huisstijl aangepast indien nodig
+   ========================================================= */
+.text-dark-1 {
+  color: var(--dark-color-1);
+}
+
+.text-light-1 {
+  color: var(--light-color-1);
+}
+
+.text-near-white {
+  color: var(--near-white);
+}
+
+.text-light-2 {
+  color: var(--light-color-2);
+}
+
+.text-dark-2 {
+  color: var(--dark-color-2);
+}

@@ -1,0 +1,22 @@
+{{/* 
+  Partial: css.html
+  Laadt meerdere CSS-bestanden voor development en production
+*/}}
+
+{{- $files := slice "css/layout.css" "css/header.css" "css/main.css" "css/footer.css" }}
+
+{{- if hugo.IsDevelopment }}
+  {{/* In development: losse links */}}
+  {{- range $files }}
+    {{- $file := resources.Get . }}
+    <link rel="stylesheet" href="{{ $file.RelPermalink }}">
+  {{- end }}
+{{- else }}
+  {{/* In productie: bundelen, minify en fingerprint */}}
+  {{- $resources := slice }}
+  {{- range $files }}
+    {{- $resources = $resources | append (resources.Get .) }}
+  {{- end }}
+  {{- $bundle := $resources | resources.Concat "css/bundle.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous">
+{{- end }}

@@ -1,0 +1,90 @@
+baseURL = 'https://audhdsidethelines.nl/'
+defaultContentLanguage = "nl"
+languageCode = "nl"
+title = 'AuDHDside The Lines'
+
+theme = 'kevessa'
+
+[taxonomies]
+  category = "categories"
+  region   = "regions"
+  country  = "countries"
+  tag      = "tags"
+
+# multilingual structuur
+[languages]
+
+  [languages.nl]
+    languageName = "Nederlands"
+    weight = 1
+    contentDir = "content/nl"
+    languageCode = "nl-NL"
+
+    [languages.nl.menu]
+
+      [[languages.nl.menu.main]]
+        identifier = "praktisch"
+        name = "PRAKTISCHE TIPS"
+        url = "/posts/praktisch"
+        weight = 1
+      
+      [[languages.nl.menu.main]]
+        identifier = "bestemmingen"
+        name = "BESTEMMINGEN"
+        url = "/regions"
+        weight = 2
+
+      [[languages.nl.menu.main]]
+        identifier = "about"
+        name = "OVER ONS"
+        url = "/about"
+        weight = 3
+    
+      [languages.nl.params]
+        footerText = "© CURRENT_YEAR AuDHDside The Lines. Alle rechten voorbehouden."
+        slogan = "Niet binnen de lijntjes, wel naar de mooiste plekken"
+        sidebar_about_title = "Over Ons"
+        sidebar_about_description = "Wij zijn Kev en Bo, twee neurodivergente reizigers die graag op avontuur gaan - of het nu een korte dagtrip is of een grote reis. Met autisme en ADHD gaat het soms net wat anders, maar juist dat maakt onze reizen bijzonder. Via onze verhalen en tips willen we laten zien hoe leuk reizen met een neurodivergent brein kan zijn!"
+        footerOver = "Bij AuDHDside The Lines vind je tips en inspiratie voor reizen met een neurodivergent brein."
+        tagText = "Hieronder vind je alle artikelen die te maken hebben met"
+        followUs = "Volg ons op"
+
+  #[languages.en]
+  #  languageName = "English"
+  #  weight = 2
+  #  contentDir = "content/en"
+  #  languageCode = "en-US"
+
+  #  [languages.en.menu]
+  #    [[languages.en.menu.main]]
+  #      identifier = "home"
+  #      name = "Home"
+  #      url = "/en/"
+  #      weight = 1
+
+  #    [[languages.en.menu.main]]
+  #      identifier = "about"
+  #      name = "About me"
+  #      url = "/en/about/"
+  #      weight = 2
+
+  #    [[languages.en.menu.main]]
+  #      identifier = "contact"
+  #      name = "Contact"
+  #      url = "/en/contact/"
+  #      weight = 3
+
+  #    [languages.en.params]
+  #        footerText = "© 2025 AuDHDside The Lines. All rights reserved."
+
+[params]
+    about_me = true
+    bookmarks = false
+    featured_tags = true
+    default_header_image = "/images/standard-header.jpg"
+
+    sidebar_avatar = "/images/zuid-amerika/chili/patagonie/cascada.jpg"
+
+    [params.social]
+        instagram = "https://www.instagram.com/audhdsidethelines/"
+        email = "contact@audhdsidethelines.nl"

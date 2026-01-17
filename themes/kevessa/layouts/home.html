@@ -1,0 +1,89 @@
+{{ define "main" }}
+  <!-- Recent posts -->
+  <section class="home-page">
+  <h1>{{ .Params.recentposts }}</h1>
+  <div class="carousel">
+  <div class="tag-container">
+  {{ range first 10 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    <a href="{{ .RelPermalink }}">
+      <div class="tag-box" style="background-image: url('{{ .Params.headerimage }}');">
+        <h2>{{ .LinkTitle }}</h2>
+      <!-- {{ .Summary }} -->
+      </div>
+    </a>
+  {{ end }}
+  </div>
+  </div>
+  </section>
+
+  <!-- Well prepared, practical tips categories -->
+  <section class="home-page">
+  <h1>{{ .Params.wellprepared }}</h1>
+  <div class="carousel">
+    <div class="tag-container">
+      {{ $tags := slice }}
+      {{ range where site.RegularPages "Params.categories" "intersect" (slice "praktische-tips") }}
+        {{ range .Params.tags }}
+          {{ if not (in $tags .) }}
+            {{ $tags = $tags | append . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{ range $tags }}
+        {{ $tagPage := site.GetPage (printf "/tags/%s" (. | urlize)) }}
+          <a href="{{ $tagPage.RelPermalink }}">
+          <div class="tag-box"
+            {{ with $tagPage.Params.headerimage }}
+              style="background-image: url('{{ . }}');"
+            {{ end }}>
+            <h2>{{ . }}</h2>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+  </section>
+
+  <!-- Countries from most recent posts -->
+  <section class="home-page">
+  <h1>{{ .Params.destinations }}</h1>
+  <div class="carousel">
+    <div class="tag-container">
+      {{ $posts := where site.RegularPages "Section" "posts" }}
+      {{ $sorted := $posts.ByDate.Reverse }}
+      {{ $uniqueCountries := slice }}
+
+      {{ range $sorted }}
+        {{ range .Params.countries }}
+          {{ $country := . }}
+          {{ if not (in $uniqueCountries $country) }}
+            {{ $uniqueCountries = $uniqueCountries | append $country }}
+            {{ $landPage := site.GetPage (printf "/countries/%s" (. | urlize)) }}
+          <a href="{{ $landPage.RelPermalink }}">
+          <div class="tag-box"
+            {{ with $landPage.Params.headerimage }}
+              style="background-image: url('{{ . }}');"
+            {{ end }}>
+            <h2>{{ $landPage.Title }}</h2>
+          </div>
+        </a>
+       
+          {{ end }}
+          {{ if ge (len $uniqueCountries) 10 }}
+            {{ break }}
+          {{ end }}
+        {{ end }}
+        {{ if ge (len $uniqueCountries) 10 }}
+          {{ break }}
+        {{ end }}
+      {{ end }}
+
+      {{ range $uniqueCountries }}
+        
+      {{ end }}
+    </div>
+  </div>
+  </section>
+  
+{{ end }}
