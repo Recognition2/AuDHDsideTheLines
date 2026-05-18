@@ -1,0 +1,68 @@
+{{- /*
+Renders a menu for the given menu ID.
+
+@context {page} page The current page.
+@context {string} menuID The menu ID.
+
+@example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+*/}}
+
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+{{- with index site.Menus $menuID }}
+  <nav>
+    <ul>
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+    </ul>
+  </nav>
+{{- end }}
+{{- define "_partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $attrs := dict "href" .URL }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+    <li class="main-menu-item {{ if eq .Identifier "bestemmingen" }}has-mega{{ end }}">
+      <h3><a class="{{ $page.Params.menu_text_class | default "text-near-white" }}"
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}
+      >{{ $name }}
+      </a>
+      {{ if eq .Identifier "bestemmingen" }}
+        <i class="fa fa-angle-down toggle-submenu {{ $page.Params.menu_text_class | default "text-near-white" }}"></i>
+      {{ end }}
+      </h3>
+        {{- if eq .Identifier "bestemmingen" }}
+        {{- if .HasChildren }}
+          <div class="mega-menu">
+            {{- range .Children }}
+              <div class="mega-column">
+                <h4><a href="{{ .URL }}">{{ .Name }}</a></h4>
+                {{- if .HasChildren }}
+                  <ul>
+                    {{- range .Children }}
+                      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                    {{- end }}
+                  </ul>
+                {{- end }}
+              </div>
+            {{- end }}
+          </div>
+        {{- end }}
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}
+

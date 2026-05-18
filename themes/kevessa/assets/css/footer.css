@@ -1,0 +1,47 @@
+/* =========================================================
+   Footer
+   ========================================================= */
+footer {
+  position: relative;
+  background-color: var(--dark-color-1);
+  margin-top: 1rem;
+  padding: 2rem;
+  padding-top: 60px;
+}
+
+footer .near-white {
+  color: var(--near-white);
+}
+
+.footer-wave {
+  position: absolute;
+  transform: rotate(180deg);
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+footer .copyright p {
+  font-size: small;
+}
+
+footer .social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  fill: var(--near-white);
+  color: var(--near-white);        
+}
+
+footer .social-link:hover .near-white {
+  color: var(--dark-color-2);
+}
+
+footer .social-link:hover {
+  fill: var(--dark-color-2);
+  color: var(--dark-color-2); 
+}

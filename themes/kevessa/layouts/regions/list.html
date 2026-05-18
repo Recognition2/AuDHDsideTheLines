@@ -1,0 +1,42 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+
+{{ .Content }}
+
+{{ if eq (.Title | urlize) (i18n "destinations") }}
+    {{ range where (where .Site.Pages "Section" "regions") "File.Path" "ne" .File.Path }}
+        {{ $region := index .Page.Params.menu.main.regions 0 | urlize}}
+        {{ $region_link := .RelPermalink }}
+        <h1><a href="{{ $region_link }}">{{ .Title }}</a></h1>
+        <div class="tag-container">
+        {{ range where .Site.Pages "Section" "countries" }}
+            {{ $country := .Title }}
+            {{ $country_link := .RelPermalink }}
+            {{ if eq (index .Page.Params.menu.main.regions 0 | urlize) $region }}
+                <a href="{{ $country_link }}">
+                    <div class="tag-box" style="background-image: url('{{ .Params.headerimage }}');">
+                        <h2>{{ $country }}</h2>
+                    </div>
+                </a>
+            {{ end }}
+        {{ end }}
+        </div>
+    {{ end }}
+{{ else }}
+    <div class="tag-container">
+    {{ $region := index .Page.Params.menu.main.regions 0 | urlize}}
+    {{ range where .Site.Pages "Section" "countries" }}
+        {{ $country := .Title }}
+        {{ $link := .RelPermalink }}
+        {{ if eq (index .Page.Params.menu.main.regions 0 | urlize) $region }}
+            <a href="{{ $link }}">
+                <div class="tag-box" style="background-image: url('{{ .Params.headerimage }}');">
+                    <h2>{{ $country }}</h2>
+                </div>
+            </a>
+        {{ end }}
+    {{ end }}
+    </div>
+{{ end }}
+
+{{ end }}

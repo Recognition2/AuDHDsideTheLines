@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <div class="countries">
+  <div class="tag-container">
+  {{ range where .Pages "Section" "posts" }}
+  <a href="{{ .RelPermalink }}">
+    <div class="tag-box" style="background-image: url('{{ .Params.headerimage }}');">
+      <h2>{{ .LinkTitle }}</h2>
+    </div>
+  </a>
+  {{ end }}
+  </div>
+  </div>
+
+{{ end }}

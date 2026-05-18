@@ -1,0 +1,80 @@
+<div class="header-overlay"
+  {{ with .Params.headerimage }}
+  style="background-image: url('{{ . | relURL }}')"
+  {{ else }}
+  style="background-image: url('{{ .Site.Params.default_header_image | relURL }}')"
+  {{ end }}>
+  <div class="header-top"> 
+    <div class="logo">
+      <h1 ><a href="{{ .Site.BaseURL}}" class="{{ .Params.logo_text_class | default "text-near-white" }}">
+        AUDHDSIDE<br>
+        THE LINES<!-- <img src="{{ "images/logo.png" | relURL }}" alt="AuDHDside The Lines" class="logo"> -->
+      </a></h1>
+    </div>
+    <div class="menu" id="myMenu">
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
+  <!-- bottom van de header: wisselende tekst -->
+  <div class="header-content">
+      {{ if .IsHome }}
+        <h1 class="{{ .Params.title_text_class | default "text-near-white" }}">{{ .Site.Params.slogan }}</h1>
+      {{ else }}
+        <h1 class="{{ .Params.title_text_class | default "text-near-white" }}">{{ .Title }}</h1>
+      {{ end }}
+  </div>
+
+<svg viewBox="0 0 1440 50" class="wave">
+  <!-- Achtergrondgolf -->
+  <path fill="var(--light-color-1)" d="M0,10 Q180,30 360,10 T720,10 T1080,10 T1440,10 V100 H0 Z"></path>
+  <!-- Voorgrondgolf -->
+  <path fill="var(--near-white)" d="M0,30 Q140,50 320,30 T680,30 T1040,30 T1400,30 T1760,30 V100 H0 Z"></path>
+</svg>
+</div>
+
+<script>
+function myFunction() {
+  var menu = document.getElementById("myMenu");
+  var overlay = document.querySelector(".header-overlay");
+  var icon = document.querySelector(".menu .icon i"); // hamburger icoon
+
+  // toggle menu responsive class
+  if (menu.className === "menu") {
+    menu.className += " responsive";
+    // zet class op header-overlay
+    if (overlay) overlay.classList.add("menu-open");
+    // verander hamburger naar kruisje
+    icon.classList.remove("fa-bars");
+    icon.classList.add("fa-xmark");
+  } else {
+    menu.className = "menu";
+    // verwijder class van header-overlay
+    if (overlay) overlay.classList.remove("menu-open");
+    // verander kruisje terug naar hamburger
+    icon.classList.remove("fa-xmark");
+    icon.classList.add("fa-bars");
+  }
+}
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".toggle-submenu").forEach(function(toggle) {
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      const parent = this.closest(".has-mega");
+      parent.classList.toggle("open");
+    });
+  });
+});
+window.addEventListener("scroll", function () {
+  const headerTop = document.querySelector(".header-top");
+
+  if (window.scrollY > 0) {
+    headerTop.classList.add("scrolled");
+  } else {
+    headerTop.classList.remove("scrolled");
+  }
+});
+</script>
+
